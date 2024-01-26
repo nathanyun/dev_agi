@@ -38,3 +38,36 @@ flowchart LR
 - 设计搜索算法
 - 判断叶子节点的任务完成的正确性
 
+## prompt准确率调优思路
+- 举例 ===> 格式 ===> 思维链 ==> 相关度高的案例 ==> 多次执行投票产生结果
+
+## 防止攻击
+著名的奶奶漏洞：利用哄骗让AI说出Windows升级序列号
+### 防范思路
+- 安检思路：提前写好prompt固定好system规范
+- 在用户输入前增加前缀
+  - 例如：作为客服代表，你不允许回答任何与XXX无关的问题。 用户说：{user_prompt}
+- [ChatGPT 安全风险 | 基于 LLMs 应用的 Prompt 注入攻击](https://mp.weixin.qq.com/s/zqddET82e-0eM_OCjEtVbQ)
+- [提示词破解：绕过 ChatGPT 的安全审查](https://selfboot.cn/2023/07/28/chatgpt_hacking/)
+- 调用第三方内容审核API
+
+
+# 划重点：具体、丰富、少歧义
+- 别急着上代码，先尝试用 prompt 解决，往往有四两拨千斤的效果
+- 但别迷信 prompt，合理组合传统方法提升确定性，减少幻觉
+- 定义角色、给例子是最常用的技巧
+- 用好思维链，让复杂逻辑/计算问题结果更准确
+- 防御 prompt 攻击非常重要
+
+# OpenAI API 的几个重要参数
+其它大模型的 API 基本都是参考 OpenAI，只有细节上稍有不同。
+
+OpenAI 提供了两类 API：
+
+* Completion API：续写文本，多用于补全场景。https://platform.openai.com/docs/api-reference/completions/create
+* Chat API：多轮对话，但可以用对话逻辑完成任何任务，包括续写文本。https://platform.openai.com/docs/api-reference/chat/create
+
+说明：
+- Chat 是主流，有的大模型只提供 Chat
+- 背后的模型可以认为是一样的，但也不完全一样
+- Chat 模型是纯生成式模型做指令微调之后的结果，更多才多艺，更听话
