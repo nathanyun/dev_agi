@@ -14,7 +14,7 @@ def get_completion(messages):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
-        temperature=0.6,
+        temperature=0,
         seed=1024,  # 随机种子保持不变，temperature 和 prompt 不变的情况下，输出就会不变
         tool_choice="auto",  # 默认值，由 GPT 自主决定返回 function call 还是返回文字回复。也可以强制要求必须调用指定的函数
         tools=[{
@@ -70,9 +70,7 @@ def get_completion(messages):
 
 
 # 高德地图APP KEY
-# amap_key = "88065c081c9a981e2bb5cd11f3d047e4"
 amap_key = os.environ.get("AMAP_KEY")
-
 
 # 调用高德地图的API接口，获取地址的经纬度坐标
 def get_location(location, city):
@@ -96,9 +94,7 @@ def search_pois(longitude, latitude, keyword):
     url = f"https://restapi.amap.com/v5/place/around?key={amap_key}&keywords={keyword}&location={longitude},{latitude}"
     print(url)
     try:
-        result = requests.get(url, timeout=5)
-        print(result)
-        return result
+        return requests.get(url, timeout=5)
     except requests.exceptions.RequestException as e:
         print(f"Error by search_pois: {e}")
     return None
@@ -118,7 +114,7 @@ def handel_func_calling(tool_call):
 
 
 # 定义一个prompt
-prompt = "推荐几个北京大望路附近评分4.8分以上的的咖啡店，请列出名称和地址"
+prompt = "推荐几个北京大望路附近的咖啡店"
 print('Prompt==>', prompt)
 
 messages = [
