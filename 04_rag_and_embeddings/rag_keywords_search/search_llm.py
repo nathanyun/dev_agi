@@ -3,7 +3,11 @@ import pdf2es  # 引入自定义PDF文件写入ES模块
 # 加载环境变量
 from dotenv import load_dotenv, find_dotenv
 
-_ = load_dotenv(find_dotenv())  # 读取本地 .env 文件，里面定义了 OPENAI_API_KEY
+
+# RAG（Retrieval Augmented Generation）顾名思义，通过检索的方法来增强生成模型的能力。
+
+# 读取本地 .env 文件，里面定义了 OPENAI_API_KEY
+_ = load_dotenv(find_dotenv())
 
 client = OpenAI()
 
