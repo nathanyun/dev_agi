@@ -1,3 +1,5 @@
+from devagi import get_completion
+import json
 """
 思维树案例：
 小明运动科目成绩如下：
@@ -6,25 +8,6 @@
 - 铅球成绩：12 米。
 问：他适合参加哪些搏击运动训练？
 """
-
-import json
-from openai import OpenAI
-from dotenv import load_dotenv, find_dotenv
-
-_ = load_dotenv(find_dotenv())
-
-client = OpenAI()
-
-
-def get_completion(prompt, model="gpt-3.5-turbo", temperature=0.0):
-    messages = [{"role": "user", "content": prompt}]
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=temperature  # 模型输出的随机性，0 表示随机性最小
-    )
-    return response.choices[0].message.content
-
 
 # 必须以GPT-4才支持
 def performance_analyser(text):

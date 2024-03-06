@@ -1,12 +1,7 @@
-from openai import OpenAI
-from dotenv import load_dotenv, find_dotenv
 import os
 import json
 import requests
-
-_ = load_dotenv(find_dotenv())
-
-client = OpenAI()
+from devagi import client
 
 
 # 多function calling的例子， 调用高德地图获取酒店等信息。

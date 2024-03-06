@@ -1,11 +1,7 @@
 import numpy as np
 from numpy import dot
 from numpy.linalg import norm
-from openai import OpenAI
-# 加载环境变量
-from dotenv import load_dotenv, find_dotenv
-
-_ = load_dotenv(find_dotenv())  # 读取本地 .env 文件，里面定义了 OPENAI_API_KEY
+from devagi import client
 
 """
 - 将文本转成一组浮点数：每个下标 i ，对应一个维度
@@ -27,10 +23,6 @@ def l2(a, b):
     """欧式距离 -- 越小越相似"""
     x = np.asarray(a) - np.asarray(b)
     return norm(x)
-
-
-# 初始化OpenAI客户端
-client = OpenAI()
 
 
 def get_embeddings(texts, model="text-embedding-ada-002", dimensions=None):

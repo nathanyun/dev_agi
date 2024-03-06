@@ -1,3 +1,4 @@
+from devagi import get_completion, print_pretty
 """
 思维链，是大模型涌现出来的一种神奇能力
 
@@ -11,20 +12,6 @@
 下面以客服质检案例验证思维链的效果
 客服质检的任务是，验证客服在服务客户过程中的对话中是否符合规范。
 """
-
-from openai import OpenAI
-from dotenv import load_dotenv, find_dotenv
-
-_ = load_dotenv(find_dotenv())
-
-client = OpenAI()
-
-
-def get_completion(prompt):
-    messages = [{"role": "user", "content": prompt}]
-    response = client.chat.completions.create(model='gpt-3.5-turbo', messages=messages, temperature=0)
-    return response.choices[0].message.content
-
 
 # 任务
 instruction = """
@@ -69,7 +56,7 @@ prompt = f"""
 # prompt例子如果去掉「一步一步」，context 的分析就会出错。
 
 completion = get_completion(prompt)
-print(completion)
+print_pretty(completion)
 
 """
 正常输出如下：

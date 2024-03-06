@@ -1,29 +1,7 @@
 """
 实现一个多轮对话的流量推荐客服助手
 """
-
-import json
-from openai import OpenAI
-from dotenv import load_dotenv, find_dotenv
-
-# 加载.env配置文件(代码中，_ 是一个占位符，表示忽略返回值。)
-_ = load_dotenv(find_dotenv())
-
-
-def print_json(data):
-    # 如果datab中包含model_dump_json字段， 将其转为JSON对象
-    if hasattr(data, 'model_dump_json'):
-        data = json.load(data.model_dump_json())
-
-    # 若包含列表或字典， 格式为JSON字符串打印, 否则原样打印
-    if isinstance(data, (list, dict)):
-        print(json.dumps(data, indent=4, ensure_ascii=False))
-    else:
-        print(data)
-
-
-# 初始化OpenAI客户端
-client = OpenAI()
+from devagi import client, print_pretty
 
 # 定义 message ，指定system基本要求
 message = [
@@ -64,4 +42,4 @@ get_completion('10个G不太够用，有没有那种流量大一点的？')
 get_completion('有没有50块以内的那种流量多一点的套餐？')
 get_completion('我是学生，有合适的套餐推荐吗？')
 get_completion('你工号多少？')
-print_json(message)
+print_pretty(message)

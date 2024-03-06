@@ -1,27 +1,6 @@
-import os
-from openai import OpenAI
+from devagi import client  # 引入初始化好的OpenAI客户端
 
-"""
-Tips：执行前，确保.env已经配置， 注意请更换.evn环境变量配置的GPT key
-
-注意，如果无法导入 openai 和 dotenv 包，需要在下载如下依赖：
-pip install python-dotenv openai
-
-若无法下载依赖包，请更换pip国内镜像源，换源后再重新下载依赖，例如设置为清华源：
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-"""
-# 加载 .env 到环境变量
-from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv())
-
-# 配置 OpenAI 服务
-
-client = OpenAI(
-    # defaults to os.environ.get("OPENAI_API_KEY")
-    api_key=os.getenv("OPENAI_API_KEY"),
-    base_url=os.getenv("OPENAI_BASE_URL")
-)
-
+# 创建一个聊天对话，让其生成一段文本
 response = client.chat.completions.create(
     messages=[
         {
