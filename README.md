@@ -6,3 +6,4 @@
 - 实现function calling的联系人地址信息提取
 - 基于Elasticsearch、NLTK 的问答示例
 - OpenAI embedding、chromadb 实现文本相似度检索
+- 基于向量检索的 RAG 生成式问答
