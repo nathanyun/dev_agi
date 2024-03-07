@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 24 16:03:59 2018
+Created on 2024-03-07 08:52:46
 @author: <nathan yun>
 
 chromadb是一个开源的嵌入式向量数据库, 官方文档：https://docs.trychroma.com/
