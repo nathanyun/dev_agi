@@ -33,9 +33,7 @@ db = FAISS.from_documents(pages, OpenAIEmbeddings())
 # 向量相似度检索
 #docs = db.similarity_search(query=query, k=3)
 docs = db.similarity_search_by_vector(OpenAIEmbeddings().embed_query(query))
-search_docs = ''
-for doc in docs:
-    search_docs += doc.page_content
+search_docs = ''.join(doc.page_content for doc in docs)
 
 print("===Similarity Search Completed==>" + search_docs[0:50])
 
