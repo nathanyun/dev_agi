@@ -13,6 +13,8 @@ AGI 通用人工智能开发示例代码
   - 基于Elasticsearch、NLTK 的问答示例
   - OpenAI embedding、chromadb 实现文本相似度检索
   - 基于向量检索的 RAG 生成式问答
+- [agi_05_langchain](devagi/agi_05_langchain)
+  - 基于LangChain 实现向量检索的 RAG 生成式问答， 重构原生的 chatPdf代码
 
 
 ## 联系方式
