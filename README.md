@@ -14,7 +14,8 @@ AGI 通用人工智能开发示例代码
   - OpenAI embedding、chromadb 实现文本相似度检索
   - 基于向量检索的 RAG 生成式问答
 - [agi_05_langchain](devagi/agi_05_langchain)
-  - 基于LangChain 实现向量检索的 RAG 生成式问答， 重构原生的 chatPdf代码
+  - 基于 LangChain 实现向量检索的 RAG 生成式问答， 重构原生 API 的 ChatPDF 代码
+  - [ChatPDF](devagi/agi_05_langchain/chat_pdf_view.py) 是一个基于 Langchain 的 Gradio 应用。 它使用 Langchain 提供的 PDF 解析和向量数据库功能， 并使用 OpenAI 的大模型来回答用户的问题。
 
 
 ## 联系方式
