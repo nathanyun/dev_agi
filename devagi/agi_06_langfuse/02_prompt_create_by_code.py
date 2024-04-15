@@ -35,10 +35,24 @@ Y means that the input needs to be answered by the teacher.
 N means that the input does not needs to be answered by the teacher.
 '''
 
+__check_duplicated_prompt = """
+*********
+已有提问列表:
+[
+{question_list}
+]
+*********
+新提问:
+{user_input}
+*********
+已有提问列表是否有和新提问类似的问题? 回复Y或N, Y表示有，N表示没有。
+只回复Y或N，不要回复其他内容。
+"""
+
 # 创建一个prompt
 langfuse.create_prompt(
-    name="agi_class_bot",
-    prompt=str(__local_prompt),
+    name="check_duplicated_prompt",
+    prompt=str(__check_duplicated_prompt),
     config={
         "model": "gpt-3.5-turbo-1106",
         "temperature": 0,
@@ -47,5 +61,5 @@ langfuse.create_prompt(
 )
 
 # 获取prompt
-langfuse_prompt_client = langfuse.get_prompt(name='agi_class_bot')
+langfuse_prompt_client = langfuse.get_prompt(name='check_duplicated_prompt')
 print(f"Prompt: {langfuse_prompt_client.prompt}")
