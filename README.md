@@ -17,6 +17,13 @@ AGI 通用人工智能开发示例代码
   - 基于 LangChain 实现向量检索的 RAG 生成式问答， 重构原生 API 的 ChatPDF 代码
   - [ChatPDF](devagi/agi_05_langchain/chat_pdf_view.py) 是一个基于 Langchain 的 Gradio 应用。 它使用 Langchain 提供的 PDF 解析和向量数据库功能， 并使用 OpenAI 的大模型来回答用户的问题。
 
+- [agi_06_langfuse](devagi/agi_06_langfuse)
+  - [使用langfuse来监控跟踪LLM应用](devagi/agi_06_langfuse/01_tracing_llm_project.py)
+  - [使用langfuse来管理prompt模板](devagi/agi_06_langfuse/02_prompt_management.py)
+  - [获取langfuse提示词模板缓存](devagi/agi_06_langfuse/02_prompt_caching.py) 
+  - [通过Python代码来创建langfuse的prompt](devagi/agi_06_langfuse/02_prompt_create_by_code.py) 
+  - [langfuse整合langchain做监控追踪和prompt管理](devagi/agi_06_langfuse/02_tracing_and_prompt_with_langchain.py) 
+
 
 ## 联系方式
 
