@@ -1,3 +1,5 @@
+import uuid
+
 from langchain_core.prompts import ChatPromptTemplate
 
 from langchain_openai import ChatOpenAI
@@ -44,6 +46,18 @@ check_prompt = ChatPromptTemplate.from_template(
 check_chain = check_prompt | model | parser
 
 
+def create_trace(user_id):
+    # 创建一个不重复的 id
+    trace_id = str(uuid.uuid4())
+    trace = langfuse.trace(
+        name="my_trace_name",
+        id=trace_id,
+        user_id=user_id,
+        metadata={'user_id': user_id, 'test': '哈哈哈'}
+    )
+    return trace
+
+
 # 主流程： 先验证问题是否要回答， 若需要回答再次验证问题是否重复，验证通过后还会将此问题添加进去， 最终返回结果
 def verify_question(
         question: str,
@@ -56,22 +70,20 @@ def verify_question(
           f"Outlines: {outlines}\n"
           f"Question List: {question_list}")
 
-    # 判断是否回答过
-    if question in question_list:
-        print(f'已经回答过这个问题: {question}')
-        return False
-
-    tracing_callback = CallbackHandler(user_id=user_id)
+    # 使用下面2行代码，可实现2个chain用同一个trace管理
+    trace = create_trace(user_id)
+    handler = trace.get_langchain_handler()
+    # tracing_callback = CallbackHandler(user_id=user_id, version="0.1", release="release:v0.1")
     # 判断是否需要回答
     if answer_chain.invoke(
             {"user_input": question, "outlines": outlines},
-            config={"callbacks": [tracing_callback]}
+            config={"callbacks": [handler]}
     ) == 'Y':
         # 判断是否为重复问题
         if check_chain.invoke(
                 {"user_input": question,
                  "question_list": "\n".join(question_list)},
-                config={"callbacks": [tracing_callback]}
+                config={"callbacks": [handler]}
         ) == 'N':
             question_list.append(question)
             return True
@@ -103,7 +115,7 @@ if __name__ == "__main__":
     #
     # print(f"\nResponse: {response}")
 
-    iface = gr.Interface(
+    gr.Interface(
         title="AGI 课堂跟课助手",
         description="根据课程内容，判断学生问题是否需要老师解答，已经重复的问题不需要解答",
         fn=verify_question,
@@ -115,5 +127,4 @@ if __name__ == "__main__":
                 ],
         outputs=["text"],
         stop_btn=gr.Button("Stop", variant="stop", visible=True)
-    )
-    iface.launch(share=True)
+    ).launch(share=True)
