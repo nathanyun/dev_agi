@@ -1,5 +1,5 @@
 from elasticsearch7 import Elasticsearch, helpers
-from devagi.agi_04_rag import extract_text_from_pdf, to_keywords, search
+from util import extract_text_from_pdf, to_keywords, search
 
 """
 # 安装 ES 客户端

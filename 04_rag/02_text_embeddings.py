@@ -1,7 +1,8 @@
 import numpy as np
+from dotenv import load_dotenv, find_dotenv
 from numpy import dot
 from numpy.linalg import norm
-from devagi import client
+from openai import OpenAI
 
 """
 - 将文本转成一组浮点数：每个下标 i ，对应一个维度
@@ -11,6 +12,12 @@ from devagi import client
 依赖： pip install numpy 
 """
 
+
+# 加载 .env 到环境变量
+_ = load_dotenv(find_dotenv())
+
+#  初始化OpenAI客户端
+client = OpenAI()
 
 # 定义cossim余弦距离
 def cossim(a, b):

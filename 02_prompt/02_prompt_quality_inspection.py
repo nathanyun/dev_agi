@@ -1,4 +1,28 @@
-from devagi import get_completion, print_pretty
+import os
+
+from dotenv import load_dotenv, find_dotenv
+from openai import OpenAI
+
+# 加载 .env 到环境变量
+_ = load_dotenv(find_dotenv())
+
+#  初始化OpenAI客户端
+client = OpenAI(
+    # defaults to os.environ.get("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url=os.getenv("OPENAI_BASE_URL")
+)
+
+#  OpenAI chat completions
+def get_completion(prompt, model="gpt-3.5-turbo", temperature=0.0):
+    messages = [{"role": "user", "content": prompt}]
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature,  # 模型输出的随机性，0 表示随机性最小
+    )
+    return response.choices[0].message.content
+
 """
 思维链，是大模型涌现出来的一种神奇能力
 
@@ -56,7 +80,7 @@ prompt = f"""
 # prompt例子如果去掉「一步一步」，context 的分析就会出错。
 
 completion = get_completion(prompt)
-print_pretty(completion)
+print(completion)
 
 """
 正常输出如下：

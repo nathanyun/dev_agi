@@ -1,5 +1,10 @@
+from openai import OpenAI
+from dotenv import load_dotenv, find_dotenv
 import json
-from devagi import client
+
+_ = load_dotenv(find_dotenv())
+
+client = OpenAI()
 
 
 def get_completions_choices(messages, tools, model="gpt-3.5-turbo", temperature=0.7):

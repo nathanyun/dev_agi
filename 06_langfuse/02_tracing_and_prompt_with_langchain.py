@@ -4,7 +4,6 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from langchain_openai import ChatOpenAI
 from langfuse import Langfuse
-from langfuse.callback import CallbackHandler
 from dotenv import load_dotenv, find_dotenv
 import AgiUtil
 import gradio as gr

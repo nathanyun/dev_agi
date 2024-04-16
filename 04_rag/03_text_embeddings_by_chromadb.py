@@ -9,12 +9,18 @@ pip install chromadb
 """
 import chromadb
 from chromadb.config import Settings
-from devagi.agi_04_rag import extract_text_from_pdf
-from devagi import client
+from util import extract_text_from_pdf
+from openai import OpenAI
+from dotenv import load_dotenv, find_dotenv
+
+# 加载 .env 到环境变量
+_ = load_dotenv(find_dotenv())
+
+client = OpenAI()
 
 
 def get_embeddings(texts, model="text-embedding-ada-002", dimensions=None):
-    """封装 OpenAI 的 Embedding 模型接口"""
+    # 封装 OpenAI 的 Embedding 模型接口
     if model == "text-embedding-ada-002":
         dimensions = None
     if dimensions:
@@ -72,4 +78,4 @@ results = vector_db.search(user_query, 2)
 
 # 打印检索结果
 for para in results['documents'][0]:
-    print(para+"\n")
+    print(para + "\n")

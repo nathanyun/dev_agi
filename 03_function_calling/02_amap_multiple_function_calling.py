@@ -1,7 +1,13 @@
 import os
 import json
 import requests
-from devagi import client
+from dotenv import load_dotenv, find_dotenv
+from openai import OpenAI
+
+# 加载 OpenAI key 到环境变量
+_ = load_dotenv(find_dotenv())
+
+client = OpenAI()
 
 
 # 多function calling的例子， 调用高德地图获取酒店等信息。
@@ -66,6 +72,7 @@ def get_completion(messages):
 
 # 高德地图APP KEY
 amap_key = os.environ.get("AMAP_KEY")
+
 
 # 调用高德地图的API接口，获取地址的经纬度坐标
 def get_location(location, city):

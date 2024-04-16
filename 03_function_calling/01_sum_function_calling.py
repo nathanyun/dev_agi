@@ -9,6 +9,8 @@ client = OpenAI()
 """
 OpenAI详细参数文档：https://platform.openai.com/docs/api-reference/chat/create
 """
+
+
 def get_completions(messages):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -38,13 +40,14 @@ def get_completions(messages):
 
 
 # 定义一个prompt
-prompt = "请问1+2+3+4+5+...+100，等于多少？"
-# prompt = "桌子上有3个苹果，2个香蕉，3本书，问总共有几个水果？"
+# prompt = "请问1+2+3+4+5+...+100，然后再加等于多少？"
+prompt = "桌子上有3个苹果，2个香蕉，3本书，问总共有几个水果？"
 # prompt = "太阳从哪边升起？"  # 不需要算加法，会怎样？
 print('Prompt==>', prompt)
 
 messages = [
-    {"role": "system", "content": '你是一个数学家还是一个统计学家，只能回答数学和统计学相关的知识，其他领域的问题直接拒绝回答'},
+    {"role": "system",
+     "content": '你是一个数学家还是一个统计学家，只能回答数学和统计学相关的知识，其他领域的问题直接拒绝回答'},
     {"role": "user", "content": prompt}
 ]
 
@@ -62,9 +65,9 @@ if response.tool_calls is not None:
     tool_call = response.tool_calls[0]  # 有概率会返回多个，这里只取第一个
 
     if tool_call.function.name == 'sum':
-
         # 转换成JSON
         argsJson = json.loads(tool_call.function.arguments)
+        print(f"argsJson {argsJson}")
 
         # 调用函数，并传入参数
         result = sum(argsJson['numbers'])

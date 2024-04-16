@@ -1,7 +1,20 @@
 """
 实现一个多轮对话的流量推荐客服助手
 """
-from devagi import client, print_pretty
+import os
+
+from dotenv import load_dotenv, find_dotenv
+from openai import OpenAI
+
+# 加载 .env 到环境变量
+_ = load_dotenv(find_dotenv())
+
+#  初始化OpenAI客户端
+client = OpenAI(
+    # defaults to os.environ.get("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url=os.getenv("OPENAI_BASE_URL")
+)
 
 # 定义 message ，指定system基本要求
 message = [
@@ -42,4 +55,4 @@ get_completion('10个G不太够用，有没有那种流量大一点的？')
 get_completion('有没有50块以内的那种流量多一点的套餐？')
 get_completion('我是学生，有合适的套餐推荐吗？')
 get_completion('你工号多少？')
-print_pretty(message)
+print(message)

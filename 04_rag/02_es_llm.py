@@ -1,5 +1,30 @@
-from devagi import get_completion
-from devagi.agi_04_rag import search, build_prompt
+import os
+
+from dotenv import load_dotenv, find_dotenv
+from openai import OpenAI
+
+from util import search, build_prompt
+
+# 加载 .env 到环境变量
+_ = load_dotenv(find_dotenv())
+
+#  初始化OpenAI客户端
+client = OpenAI(
+    # defaults to os.environ.get("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url=os.getenv("OPENAI_BASE_URL")
+)
+
+
+#  OpenAI chat completions
+def get_completion(prompt, model="gpt-3.5-turbo", temperature=0.0):
+    messages = [{"role": "user", "content": prompt}]
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature,  # 模型输出的随机性，0 表示随机性最小
+    )
+    return response.choices[0].message.content
 
 prompt_template = """
 你是一个问答机器人。
