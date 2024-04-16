@@ -30,7 +30,7 @@
   - [langfuse整合langchain做监控追踪和prompt管理](06_langfuse/02_tracing_and_prompt_with_langchain.py) 
 
 
-# :clown_face: About me
+# :baby: About me
 
 - Wechat：406811520 
 - Email：nasheng.yun@gmail.com
